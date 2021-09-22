@@ -1,86 +1,45 @@
 #include "main.h"
 #include <stdlib.h>
-
 /**
- * _strdup - A function that returns a pointer to a newly allocated
- * space in memory, which contains a copy of the string given as a
- * parameter.
- * @str: An input pointer of the string to copy.
- * Return: Apointer to new string or NULL if it str is NULL
- */
+  *_strdup - returns a pointer to a newly alloctaed
+  *space in memory which contains a copy of the string
+  *passed.
+  *@str: pointer to string being duplicated.
+  *
+  *Return: NULL if str is NULL.
+  *pointer to duplicated string on success.
+  *NULL if memory was insufficient.
+  */
 char *_strdup(char *str)
 {
-	char *new_str, *start;
-	int i = 0, len = 0;
+	char *nstr;
+	unsigned int len, i;
 
+	/* check is str is null */
 	if (str == NULL)
+	{
 		return (NULL);
+	}
 
-	start = str;
-
-	while (*str)
+	len = 0;
+	while (str[len] != '\0')
 	{
 		len++;
-		str++;
 	}
 
-	str = start;
-	new_str = malloc(sizeof(char) * (len + 1));
-	start = new_str;
+	nstr = malloc(sizeof(char) * (len + 1));
 
-	if (new_str != NULL)
+	/*check if malloc was successful*/
+	if (nstr == NULL)
 	{
-		for (; i < len; i++)
-		{
-			new_str[i] = *str;
-			str++;
-		}
-		new_str[i] = '\0';
-		return (start);
+		return (NULL);
 	}
-	else
-		return (NULL);
-}   
-#include "holberton.h"
-#include <stdlib.h>
 
-/**
- * _strdup - A function that returns a pointer to a newly allocated
- * space in memory, which contains a copy of the string given as a
- * parameter.
- * @str: An input pointer of the string to copy.
- * Return: Apointer to new string or NULL if it str is NULL
- */
-char *_strdup(char *str)
-{
-	char *new_str, *start;
-	int i = 0, len = 0;
-
-	if (str == NULL)
-		return (NULL);
-
-	start = str;
-
-	while (*str)
+	for (i = 0; i < len; i++)
 	{
-		len++;
-		str++;
+		nstr[i] = str[i];
 	}
+	nstr[len] = '\0';
+	return (nstr);
 
-	str = start;
-	new_str = malloc(sizeof(char) * (len + 1));
-	start = new_str;
-
-	if (new_str != NULL)
-	{
-		for (; i < len; i++)
-		{
-			new_str[i] = *str;
-			str++;
-		}
-		new_str[i] = '\0';
-		return (start);
-	}
-	else
-		return (NULL);
 }
