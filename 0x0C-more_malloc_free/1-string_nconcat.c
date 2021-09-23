@@ -1,49 +1,44 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "main.h"
+#include <stdlib.h>
+
 /**
- * string_nconcat - len of 1st str, len of 2nd str, if n < 2nd, 2nd = n
- * 2nd + 1st = total len, malloc + null byte, loop to insert into temp arr
- * @s1: input one
- * @s2: input two
- * @n: s2's number of bytes
- * Return: 0
+ * string_nconcat - A function that concatenates two strings
+ * @s1: An input pointer of the first string
+ * @s2: An input pointer of the second string
+ * @n: an input integer of number of string to concatenate
+ * Return: Apointer to concatened strings or NULL if it str is NULL
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *arr;
-	unsigned int i, j, co, co_2;
+	char *new_str;
+	unsigned int i = 0, lens1 = 0, lens2 = 0;
 
 	if (s1 == NULL)
 		s1 = "";
+
+	while (s1[lens1])
+		lens1++;
+
 	if (s2 == NULL)
 		s2 = "";
 
-	for (i = 0; s1[i] != '\0'; i++)
-	{
-	}
+	while (s2[lens2])
+		lens2++;
 
-	for (j = 0; s2[j] != '\0'; j++)
-	{
-	}
+	if (n >= lens2)
+		n = lens2;
 
-	if (n < j)
-		j = n;
-
-	j += i;
-	arr = malloc(sizeof(char *) * (j + 1));
-
-	if (arr == NULL)
+	new_str = malloc(lens1 + n + 1);
+	if (new_str == NULL)
 		return (NULL);
 
-	for (co = 0; co < i; co++)
-		arr[co] = s1[co];
-	for (co_2 = 0; co < j; co_2++)
+	for (; i < (lens1 + n); i++)
 	{
-		arr[co] = s2[co_2];
-		co++;
+		if (i < lens1)
+			new_str[i] = *s1, s1++;
+		else
+			new_str[i] = *s2, s2++;
 	}
-	co++;
-	arr[co] = '\0';
-	return (arr);
+	new_str[i] = '\0';
+	return (new_str);
 }
