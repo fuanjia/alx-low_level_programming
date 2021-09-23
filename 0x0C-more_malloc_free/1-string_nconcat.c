@@ -1,42 +1,49 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include "main.h"
 /**
- * string_nconcat - concatenate two strings up to n bytes.
- * @s1: source string
- * @s2: string to truncate up to n bytes
- * @n: number of bytes to truncate by
- * Return: pointer to new buffer
+ * string_nconcat - len of 1st str, len of 2nd str, if n < 2nd, 2nd = n
+ * 2nd + 1st = total len, malloc + null byte, loop to insert into temp arr
+ * @s1: input one
+ * @s2: input two
+ * @n: s2's number of bytes
+ * Return: 0
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *string = NULL;
-	char *ptr = NULL;
-	unsigned int len1, len2, len;
+	char *arr;
+	unsigned int i, j, co, co_2;
 
 	if (s1 == NULL)
 		s1 = "";
-	if (!s2)
+	if (s2 == NULL)
 		s2 = "";
-	for (len1 = 0; s1[len1]; len1++)
-		;
-	for (len2 = 0; s2[len2]; len2++)
-		;
-	if (len2 > n)
-		len2 = n;
-	len = len1 + len2 + 1;
-	string = malloc(sizeof(*string) * len);
-	ptr = string;
-	if (string == NULL)
+
+	for (i = 0; s1[i] != '\0'; i++)
+	{
+	}
+
+	for (j = 0; s2[j] != '\0'; j++)
+	{
+	}
+
+	if (n < j)
+		j = n;
+
+	j += i;
+	arr = malloc(sizeof(char *) * (j + 1));
+
+	if (arr == NULL)
 		return (NULL);
-	while (*s1)
+
+	for (co = 0; co < i; co++)
+		arr[co] = s1[co];
+	for (co_2 = 0; co < j; co_2++)
 	{
-		*string++ = *s1++;
+		arr[co] = s2[co_2];
+		co++;
 	}
-	while (n-- && *s2 != '\0')
-	{
-		*string++ = *s2++;
-	}
-	*string = '\0';
-	return (ptr);
+	co++;
+	arr[co] = '\0';
+	return (arr);
 }
